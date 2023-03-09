@@ -20,6 +20,7 @@ import ru.itmentor.spring.boot_security.demo.util.UserNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -33,13 +34,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public void addUser(User user) {
         userDao.save(user);
     }
 
     @Override
-    @Transactional
     public void updateUser(int id, User user) {
         User updatedUser = userDao.getById(id);
         updatedUser.setName(user.getName());
@@ -111,15 +110,8 @@ public class UserServiceImpl implements UserService {
             }
             throw new UserNotCreatedException(errorMsg.toString());
         } else {
-            newuser.setName(user.getName());
-            newuser.setAge(user.getAge());
-            newuser.setEmail(user.getEmail());
-            newuser.setPassword(user.getPassword());
-            addUser(newuser);
-            newuser.setRoles(user.getRoles());
-            addUser(newuser);
             return ResponseEntity.ok(HttpStatus.OK);
         }
-    };
+    }
 
 }

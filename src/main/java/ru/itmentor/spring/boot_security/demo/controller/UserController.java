@@ -18,6 +18,19 @@ public class UserController {
         this.userService = service;
     }
 
+    @RequestMapping("/")
+    public String formroot() {
+        return ("/login");
+    }
+
+
+    @RequestMapping("/admin")
+    public String index(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
+        return "admin";
+    }
+
     @RequestMapping("/user")
     public String user(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -26,4 +39,6 @@ public class UserController {
         model.addAttribute("user", user);
         return "user";
     }
+
+
 }

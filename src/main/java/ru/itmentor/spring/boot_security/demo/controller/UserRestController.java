@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ru.itmentor.spring.boot_security.demo.model.User;
 import ru.itmentor.spring.boot_security.demo.service.UserService;
@@ -15,14 +14,13 @@ import ru.itmentor.spring.boot_security.demo.util.UserNotCreatedException;
 import javax.validation.Valid;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/admin")
-public class AdminRestController {
+public class UserRestController {
     private final UserService service;
 
     @Autowired
-    public AdminRestController(UserService service) {
+    public UserRestController(UserService service) {
         this.service = service;
 
     }
